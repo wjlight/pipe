@@ -117,7 +117,11 @@ func newAtomEntry(i *Item) *AtomEntry {
 	updateTime := anyTimeFormat(time.RFC3339, i.Updated, i.Created)
 	if updateTime == "" {
 		updateTime = time.Now().Format(time.RFC3339)
-		if len(updateTime)== 20 {
+		if len(updateTime) == 20 {
+			updateTime += "+01:00"
+		}
+	} else {
+		if len(updateTime) == 20 {
 			updateTime += "+01:00"
 		}
 	}
@@ -144,11 +148,15 @@ func (a *Atom) AtomFeed() *AtomFeed {
 	updated := anyTimeFormat(time.RFC3339, a.Updated, a.Created)
 	if updated == "" {
 		updated = time.Now().Format(time.RFC3339)
-		if len(updated)== 20 {
+		if len(updated) == 20 {
+			updated += "+01:00"
+		}
+	} else {
+		if len(updated) == 20 {
 			updated += "+01:00"
 		}
 	}
-	fmt.Printf("atomFeed:"+updated)
+	fmt.Printf("atomFeed:" + updated)
 	feed := &AtomFeed{
 		Xmlns:    ns,
 		Title:    a.Title,
