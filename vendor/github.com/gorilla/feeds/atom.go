@@ -87,6 +87,22 @@ type Atom struct {
 	*Feed
 }
 
+func handleGoogleMapDate(updateTime string) string {
+	if updateTime == "" {
+		updateTime = time.Now().Format(time.RFC3339)
+		if len(updateTime) == 20 {
+			updateTime = string(updateTime[0 : len(updateTime)-1])
+			updateTime += "+01:00"
+		}
+	} else {
+		if len(updateTime) == 20 {
+			updateTime = string(updateTime[0 : len(updateTime)-1])
+			updateTime += "+01:00"
+		}
+	}
+	return updateTime
+}
+
 func newAtomEntry(i *Item) *AtomEntry {
 	id := i.Id
 	// assume the description is html
@@ -115,18 +131,7 @@ func newAtomEntry(i *Item) *AtomEntry {
 		link_rel = "alternate"
 	}
 	updateTime := anyTimeFormat(time.RFC3339, i.Updated, i.Created)
-	if updateTime == "" {
-		updateTime = time.Now().Format(time.RFC3339)
-		if len(updateTime) == 20 {
-			updateTime = string(updateTime[0 : len(updateTime)-1])
-			updateTime += "+01:00"
-		}
-	} else {
-		if len(updateTime) == 20 {
-			updateTime = string(updateTime[0 : len(updateTime)-1])
-			updateTime += "+01:00"
-		}
-	}
+	updateTime = handleGoogleMapDate(updateTime)
 	x := &AtomEntry{
 		Title:   i.Title,
 		Links:   []AtomLink{{Href: i.Link.Href, Rel: link_rel, Type: i.Link.Type}},
@@ -148,18 +153,7 @@ func newAtomEntry(i *Item) *AtomEntry {
 // create a new AtomFeed with a generic Feed struct's data
 func (a *Atom) AtomFeed() *AtomFeed {
 	updated := anyTimeFormat(time.RFC3339, a.Updated, a.Created)
-	if updated == "" {
-		updated = time.Now().Format(time.RFC3339)
-		if len(updated) == 20 {
-			updated = string(updated[0 : len(updated)-1])
-			updated += "+01:00"
-		}
-	} else {
-		if len(updated) == 20 {
-			updated = string(updated[0 : len(updated)-1])
-			updated += "+01:00"
-		}
-	}
+	updated = handleGoogleMapDate(updated)
 	fmt.Printf("atomFeed:" + updated)
 	feed := &AtomFeed{
 		Xmlns:    ns,
