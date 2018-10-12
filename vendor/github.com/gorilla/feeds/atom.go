@@ -118,10 +118,12 @@ func newAtomEntry(i *Item) *AtomEntry {
 	if updateTime == "" {
 		updateTime = time.Now().Format(time.RFC3339)
 		if len(updateTime) == 20 {
+			updateTime = string(updateTime[0 : len(updateTime)-1])
 			updateTime += "+01:00"
 		}
 	} else {
 		if len(updateTime) == 20 {
+			updateTime = string(updateTime[0 : len(updateTime)-1])
 			updateTime += "+01:00"
 		}
 	}
@@ -149,10 +151,12 @@ func (a *Atom) AtomFeed() *AtomFeed {
 	if updated == "" {
 		updated = time.Now().Format(time.RFC3339)
 		if len(updated) == 20 {
+			updated = string(updated[0 : len(updated)-1])
 			updated += "+01:00"
 		}
 	} else {
 		if len(updated) == 20 {
+			updated = string(updated[0 : len(updated)-1])
 			updated += "+01:00"
 		}
 	}
