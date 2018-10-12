@@ -135,6 +135,7 @@ func newAtomEntry(i *Item) *AtomEntry {
 // create a new AtomFeed with a generic Feed struct's data
 func (a *Atom) AtomFeed() *AtomFeed {
 	updated := anyTimeFormat(time.RFC3339, a.Updated, a.Created)
+	fmt.Printf("atomFeed:"+updated)
 	feed := &AtomFeed{
 		Xmlns:    ns,
 		Title:    a.Title,
