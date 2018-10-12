@@ -114,12 +114,19 @@ func newAtomEntry(i *Item) *AtomEntry {
 	if link_rel == "" {
 		link_rel = "alternate"
 	}
+	updateTime := anyTimeFormat(time.RFC3339, i.Updated, i.Created)
+	if updateTime == "" {
+		updateTime = time.Now().Format(time.RFC3339)
+		if len(updateTime)== 20 {
+			updateTime += "+01:00"
+		}
+	}
 	x := &AtomEntry{
 		Title:   i.Title,
 		Links:   []AtomLink{{Href: i.Link.Href, Rel: link_rel, Type: i.Link.Type}},
 		Content: c,
 		Id:      id,
-		Updated: anyTimeFormat(time.RFC3339, i.Updated, i.Created),
+		Updated: updateTime,
 	}
 
 	if i.Enclosure != nil && link_rel != "enclosure" {
