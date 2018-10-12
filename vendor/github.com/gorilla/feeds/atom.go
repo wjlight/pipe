@@ -138,7 +138,7 @@ func (a *Atom) AtomFeed() *AtomFeed {
 	if updated == "" {
 		updated = time.Now().Format(time.RFC3339)
 		if len(updated)== 20 {
-			updated += "+00:00"
+			updated += "+01:00"
 		}
 	}
 	fmt.Printf("atomFeed:"+updated)
