@@ -137,6 +137,9 @@ func (a *Atom) AtomFeed() *AtomFeed {
 	updated := anyTimeFormat(time.RFC3339, a.Updated, a.Created)
 	if updated == "" {
 		updated = time.Now().Format(time.RFC3339)
+		if len(updated)== 20 {
+			updated += "+00:00"
+		}
 	}
 	fmt.Printf("atomFeed:"+updated)
 	feed := &AtomFeed{
