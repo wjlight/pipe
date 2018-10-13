@@ -1,10 +1,4 @@
 <template>
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-      google_ad_client: "ca-pub-9197696176743798",
-      enable_page_level_ads: true
-    });
-  </script>
   <div class="console" id="particles">
     <div class="card">
       <v-stepper v-model="step">
