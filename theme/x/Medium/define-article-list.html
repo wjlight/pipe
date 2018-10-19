@@ -2,7 +2,6 @@
 {{if eq (len .Articles) 0}}
 {{.I18n.NoData}}
 {{end}}
-<a target="_blank" href="https://amazon.cn/b?_encoding=UTF8&tag=lightwj-23&linkCode=ur2&linkId=d4a9a3df6e2f221df025e699c22f57e8&camp=536&creative=3200&node=1895880071">玩玩玩</a><img src="//ir-cn.amazon-adsystem.com/e/ir?t=lightwj-23&l=ur2&o=28" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
 <div class="fn-clear article__wrap">
     {{range $index, $item := .Articles}}
     <div class="article__item--wrap{{if or (and (ge $index 18) (le $index 19)) (or (eq $index 8) (eq $index 9))}} article__item--wrap-mid{{end}}">
