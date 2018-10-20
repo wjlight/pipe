@@ -23,20 +23,22 @@ import (
 	"github.com/b3log/pipe/util"
 	"github.com/gin-gonic/gin"
 	model "github.com/b3log/pipe/model"
+	"path/filepath"
+	"html/template"
 )
 
 func showIndexAction(c *gin.Context) {
-	//t, err := template.ParseFiles(filepath.ToSlash(filepath.Join(model.Conf.StaticRoot, "console/dist/index.html")))
-	//if nil != err {
-	//	logger.Errorf("load index page failed: " + err.Error())
-	//	c.String(http.StatusNotFound, "load index page failed")
-	//
-	//	return
-	//}
-	//
-	//t.Execute(c.Writer, nil)
+	t, err := template.ParseFiles(filepath.ToSlash(filepath.Join(model.Conf.StaticRoot, "console/dist/index.html")))
+	if nil != err {
+		logger.Errorf("load index page failed: " + err.Error())
+		c.String(http.StatusNotFound, "load index page failed")
+
+		return
+	}
+
+	t.Execute(c.Writer, nil)
 	//这里写死，我的博客主页
-	c.Redirect(302,"/blogs/wjlight")
+	//c.Redirect(302,"/blogs/wjlight")
 }
 
 func showPlatInfoAction(c *gin.Context) {
