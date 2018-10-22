@@ -19,16 +19,6 @@
 <div class="wrapper content">
     <article>
         <header class="article-detail__header">
-            <script type="text/javascript">
-                ( function() {
-                    if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
-                    var unit = {"calltype":"async[2]","publisher":"lightnwj","width":728,"height":90,"sid":"Chitika Default"};
-                    var placement_id = window.CHITIKA.units.length;
-                    window.CHITIKA.units.push(unit);
-                    document.write('<div class="pipe-content__reset article__abstract fn-padding30" id="chitikaAdBlock-' + placement_id + '"></div>');
-                }());
-            </script>
-            <script type="text/javascript" src="//cdn.chitika.net/getads.js" async></script>
             <div class="ft-center fn-relative">
                 <h2 class="header__title{{if .Article.Editable}} header__title--edit{{end}}">
                     {{if .Article.Topped}}
@@ -75,6 +65,16 @@
             </div>
         </header>
         <section class="pipe-content__reset article__abstract fn-padding30" id="articleContent" data-author="{{.Article.Author.Name}}">
+            <script type="text/javascript">
+                ( function() {
+                    if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
+                    var unit = {"calltype":"async[2]","publisher":"lightnwj","width":728,"height":90,"sid":"Chitika Default"};
+                    var placement_id = window.CHITIKA.units.length;
+                    window.CHITIKA.units.push(unit);
+                    document.write('<div class="pipe-content__reset article__abstract fn-padding30" id="chitikaAdBlock-' + placement_id + '"></div>');
+                }());
+            </script>
+            <script type="text/javascript" src="//cdn.chitika.net/getads.js" async></script>
             {{.Article.Content}}
         </section>
         <div class="article__action fn-clear">
